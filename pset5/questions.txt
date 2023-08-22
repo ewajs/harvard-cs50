@@ -1,0 +1,27 @@
+0.  A very large word, also: a lung disease.
+1.  Returns usage measures, meaning an estimate of the CPU timed consumed by a 
+    process.
+2.  16 members, 2 struct timevals and 14 longs.
+3.  To calculate the interval. You don't necessarily need to alter the contents,
+    if you're passing them by reference is likely that calculate is modifying 
+    them.
+4.  It reads them character by character and then handles every different 
+    situation with a chain of if- else ifs. Every time a character is read
+    there are many possibilities:
+        1. space reached, end of current word, append '\0'
+        2. valid letter or ', keep reading current word
+        3. number, this word is not going to be passed for checking
+        4. exceded maximum length, this word is not going to be checked
+5.  Since you don't control the file you're going to receive using fscanf is not
+    safe. There might easily be a string that exceeds the maximum length assigned
+    to the buffer, forcing the program to make invalid writes. using fgetc is a 
+    secure method to ensure everything is under the program's control.
+6.  To remind us to lowercase them by forbidding us to modify them.
+7.  A Hash Table made of nodes consisting of a char array to hold the word and
+    a pointer to the next node (if any).
+8.  It wasn't that slow, I upgraded it a bit afterwards though.
+9.  I removed unnecesary calls to strlen and started checking for '\0' as I went
+    up the word instead.
+10. I think every call to a function of the string.h library is compromising
+    speed. Maybe I could implement them again, making them fulfill only the
+    specific needs of this program. I settled for removing unnecessary calls.

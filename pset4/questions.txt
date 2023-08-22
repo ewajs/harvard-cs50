@@ -1,0 +1,43 @@
+0.  BMP has a maximum 32 bit per pixel (bpp), meaning it can represent 2^32 different colors (4,294,967,296 different colors).
+    GIF has a maximum 8 bpp, so it can represent 2^8 = 256 different colors.
+    JPEG has a maximum 24 bpp, that's 16,777,216 colors.
+    PNG has a maximum 24 bpp, that's 16,777,216 colors (it may have an extra alpha channel).
+1.  GIF is the only format that supports animatio (PNG technically can, but almost no browser can display it).
+2.  Lossy compression is a method that discards some data in the process of compression, therefore some data will be definitely lost.
+    Lossless compression relies on algorithms that will enable a perfect reconstruction of the original data.
+3.  JPEG is lossy-compressed, each time you edit and save a JPEG, some data will be lost.
+4.  When a file is deleted on a FAT file system the data is not actually lost but
+    rather the OS deletes some metadata and marks the clusters of the hard drive
+    in which the file was stored as free. But the data is still there, though not
+    accessible through regular means. There are a number of available tools to
+    recover such data.
+5.  A regular user might want to sanitize a hard drive in order to be sure that
+    the data there stored is really unrecoverable. The most widely accepted method 
+    is to write a random pattern to the clusters that held the sensitive data, tehreby
+    deleting every renmant of the file.
+6.  stdint.h is a header file that defines different integer types of fixed widths (measured in bits)
+7.  To make the program OS-independent. A char or an int might not be the same length (in bits)
+    in different operating systems (for example in a 64 bit OS vs. a 32 bit OS). This way, you
+    can make sure that the length of the variable you use in your program will remain fixed
+    regardless of the OS in which you compile it.
+8.  A BYTE is 1 byte long, a DWORD is 4 bytes, a LONG is 4 bytes and a WORD is 2 bytes
+    (info taken from https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751%28v=vs.85%29.aspx )
+9.  The magic numbers are the characters "BM" (not a string, just 'B' and 'M').
+10. bfSize is a variable that resides in BITMAPFILEHEADER and represents the size in bytes
+    of the bitmap file, while biSize is a variable that resides in BITMAPINFOHEADER and contains
+    the size of the struct itself.
+11. if biSize is negative it means that the bitmap is ordered top-down, meaning that the 
+    first pixel (origin) is located in the upper-left corner. Pixel numbers go from left to
+    right and from top to bottom in this mode.
+12. The biBitCount specifies how many bits per pixel (bpp) the BMP will have.
+13. The fopen() function on line 37 may return NULL if it failed to create (or open in case the 
+    it already existed) the file described by the string pointed by the variable outfile.
+14. Because we only want to read one chunk of bytes the size of the specified struct at a time.
+    (one FILEHEADER, one INFOHEADER and one RGBTRIPLE at a time).
+15. If bi.biWidth is 3 then paddding will be set to 3.
+16. fseek() is used to set the offset of the file pointer in a desired location. Depending
+    on the value of whence the offset will be calculted relative to another absolute position
+    of the file. The value provided in offset is how many bytes from that "anchoring point" will
+    be offseted and stream must be the file pointer itself.
+17. SEEK_CUR is the macro that tells fseek to make the offset from the current position.
+18. Rob Bowden holding a cat!!
